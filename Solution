@@ -7,7 +7,8 @@ import java.util.regex.*;
 public class Solution {
 
     public static void main(String[] args) {
-              
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        
        Scanner in = new Scanner(System.in);
        String s = in.nextLine();
        
@@ -24,26 +25,29 @@ public class Solution {
     
     public static BigInteger fibonacci(BigInteger a, BigInteger b, int n)
         {
-        BigInteger[] fibonacciNumbers = new BigInteger[n+1];
-         
+        TreeMap<Integer,BigInteger> treeset = new TreeMap<Integer,BigInteger>();
+            
         
-        for(int i=0;i<=n;i++)
+        for(int i=1;i<=n;i++)
             {
             
             BigInteger bi = BigInteger.valueOf(-1);
-            fibonacciNumbers[i] = bi;
+            treeset.put(i,bi);
         }
        
-        fibonacciNumbers[1] = a;
-        fibonacciNumbers[2] = b;
+        treeset.put(1,a);
+        treeset.put(2,b);
         
         for( int i=3;i<=n;i++)
             {
-            BigInteger squaredPreviousNumber =fibonacciNumbers[i-1].multiply(fibonacciNumbers[i-1]) ;
+            BigInteger lastnumber = treeset.get(i-1);
+            BigInteger last2number = treeset.get(i-2);
             
-            fibonacciNumbers[i] =  squaredPreviousNumber.add(fibonacciNumbers[i-2]);
+            lastnumber =lastnumber.multiply(lastnumber) ;
+            
+            treeset.put(i,lastnumber.add(last2number));
             
         }
-        return fibonacciNumbers[n];
+        return treeset.get(n);
     }
 }
