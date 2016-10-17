@@ -1,0 +1,49 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+              
+       Scanner in = new Scanner(System.in);
+       String s = in.nextLine();
+       
+       String[] sa = s.split(" ");
+       BigInteger a = BigInteger.valueOf(Integer.parseInt(sa[0]));
+       BigInteger b = BigInteger.valueOf(Integer.parseInt(sa[1]));
+       int c = Integer.parseInt(sa[2]);
+       
+       BigInteger result = fibonacci(a,b,c);
+        
+        System.out.print(result.toString());
+    }
+
+    
+    public static BigInteger fibonacci(BigInteger a, BigInteger b, int n)
+        {
+        BigInteger[] fibonacciNumbers = new BigInteger[n+1];
+         
+        
+        for(int i=0;i<=n;i++)
+            {
+            
+            BigInteger bi = BigInteger.valueOf(-1);
+            fibonacciNumbers[i] = bi;
+        }
+       
+        fibonacciNumbers[1] = a;
+        fibonacciNumbers[2] = b;
+        
+        for( int i=3;i<=n;i++)
+            {
+            BigInteger squaredPreviousNumber =fibonacciNumbers[i-1].multiply(fibonacciNumbers[i-1]) ;
+            
+            fibonacciNumbers[i] =  squaredPreviousNumber.add(fibonacciNumbers[i-2]);
+            
+        }
+        return fibonacciNumbers[n];
+    }
+}
